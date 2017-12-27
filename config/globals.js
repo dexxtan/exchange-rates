@@ -60,4 +60,6 @@ module.exports.globals = {
   ****************************************************************************/
 
 	// models: true
+
+  OPEN_EXCHANGE_RATES_APP_ID: '91b8dd663ae6472283a0a418fc8d6ac3'
 };

@@ -3,7 +3,7 @@ const requestPromise = require('request-promise');
 
 module.exports = {
   getExchangeRates: () => {
-    const appId = '91b8dd663ae6472283a0a418fc8d6ac3';
+    const appId = sails.config.globals.OPEN_EXCHANGE_RATES_APP_ID;
 
     return CacheService.get('rates')
       .then((exchangeRates) => {
