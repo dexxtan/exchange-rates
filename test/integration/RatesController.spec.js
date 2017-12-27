@@ -3,19 +3,32 @@ const request = require('supertest');
 describe('RatesController', () => {
 
   describe('getCurrentRates method', () => {
+    let sandbox;
+    let rates;
+    let ratesServiceStub;
+
+    beforeEach(() => {
+      sandbox = sinon.createSandbox();
+      rates = {
+        USD: 1,
+        SGD: 1.34151
+      };
+      ratesServiceStub = sandbox.stub(RatesService, 'getExchangeRates');
+      ratesServiceStub.resolves(rates);
+    });
+
+    afterEach(() => {
+      sandbox.restore();
+    });
+
     it('should respond with all exchange rates', () => {
       return request(sails.hooks.http.app)
         .get('/current_rates')
         .expect(200)
         .then(response => {
           const keys = Object.keys(response.body);
-          keys.map(key => {
-            expect(key).to.be.a('string');
-            expect(key).to.have.lengthOf(3);
-            expect(response.body[key]).to.be.a('number');
-            expect(response.body[key]).to.be.finite;
-          });
           expect(keys.length).to.be.at.least(1);
+          expect(response.body).to.be.deep.equal(rates);
         });
     });
 

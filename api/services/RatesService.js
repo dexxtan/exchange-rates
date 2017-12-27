@@ -12,8 +12,7 @@ module.exports = {
             .then(response => {
               const parsedResponse = JSON.parse(response);
               const rates = _.get(parsedResponse, 'rates');
-              CacheService.put('rates', rates);
-              return rates;
+              return CacheService.put('rates', rates);
             });
         }
         

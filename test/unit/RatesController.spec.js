@@ -16,7 +16,7 @@ describe('RatesController', () => {
     rates = {
       USD: 1,
       SGD: 1.34151
-    }
+    };
     responseSendSpy = sandbox.spy(response, 'send');
     ratesServiceStub = sandbox.stub(RatesService, 'getExchangeRates');
     ratesServiceStub.resolves(rates);
